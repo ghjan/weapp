@@ -14,12 +14,12 @@ export default {
     pages: ['pages/books/main', '^pages/me/main', 'pages/comments/main'],
     window: {
       backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#EA5149',
-      navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
+      navigationBarBackgroundColor: '#EA5A49',
+      navigationBarTitleText: '蜗牛图书',
+      navigationBarTextStyle: 'light'
     },
     tabBar: {
-      selectedColor: '#EA5149',
+      selectedColor: '#EA5A49',
       list: [
         {
           pagePath: 'pages/books/main',
