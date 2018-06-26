@@ -7,6 +7,14 @@ export default {
 </script>
 
 <style lang="scss">
+.text-footer{
+  text-align: center;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+.text-primary{
+  color: #EA5149;
+}
 .btn{
   color: white;
   background-color: #EA5A49;

@@ -10,7 +10,7 @@
 </template>
 <script>
 import yearProgress from '@/components/yearprogress.vue'
-import {showSuccess} from '@/util'
+import {showSuccess, showModal, post} from '@/util'
 import qcloud from 'wafer2-client-sdk'
 import config from '@/config'
 export default {
@@ -28,11 +28,21 @@ export default {
     }
   },
   methods: {
+    async addBook (isbn) {
+      let res = await post('/weapp/addbook', {
+        isbn,
+        openid: this.userinfo.openId
+      })
+      console.log(res)
+      showModal('添加成功', `${res.title}添加成功`)
+    },
     scanBook () {
       // 允许从相机和相册扫码
       wx.scanCode({
         success: (res) => {
-          console.log(res)
+          if (res.result) {
+            this.addBook(res.result)
+          }
         }
       })
     },
@@ -50,7 +60,7 @@ export default {
                 console.log(res)
                 showSuccess('登录成功')
                 this.userinfo = res.data.data
-                wx.setStorageSync('userinfo', res.data)
+                wx.setStorageSync('userinfo', res.data.data)
               }
             })
           },
