@@ -22,7 +22,7 @@ export default {
       }
     }
   },
-  created () {
+  onShow () {
     if (wx.getStorageSync('userinfo')) {
       this.userinfo = wx.getStorageSync('userinfo')
     }
