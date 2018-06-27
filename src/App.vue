@@ -7,6 +7,18 @@ export default {
 </script>
 
 <style lang="scss">
+.right{
+  float: right;
+}
+.left{
+  float: left;
+}
+.page-title{
+  padding-left: 20px;
+  background: #eee;
+  line-height: 40px;
+  font-size: 14px;
+}
 .text-footer{
   text-align: center;
   font-size: 12px;

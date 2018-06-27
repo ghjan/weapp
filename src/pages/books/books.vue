@@ -1,6 +1,6 @@
 <template>
   <div>
-    <topSwiper :tops="top"></topSwiper>
+    <topSwiper v-if="top.length" :tops="top"></topSwiper>
     <card v-for="book in books" :key="book.isbn" :book="book"></card>
     <p class="text-footer" v-if="!more">没有更多数据</p>
   </div>
@@ -18,7 +18,7 @@ export default {
       top: []
     }
   },
-  created () {
+  onShow () {
     this.getBookList(true)
     this.getTop()
   },
@@ -54,7 +54,6 @@ export default {
     },
     async getTop () {
       let res = await get('/weapp/top')
-      console.log(res)
       this.top = res.list
     }
   },

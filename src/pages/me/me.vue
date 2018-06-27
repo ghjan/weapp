@@ -17,7 +17,7 @@ export default {
   data () {
     return {
       userinfo: {
-        avatarUrl: '../../../static/img/unlogin.png',
+        avatarUrl: '../../static/img/unlogin.png',
         nickName: '点击登录'
       }
     }
