@@ -1,7 +1,7 @@
 <template>
   <div class="comment-container">
-    <commentlist v-if="userinfo.openId" type="user" :commentslist="comments"></commentlist>
-    <div v-if="userinfo.openId">
+    <commentlist v-if="userinfo.openId && comments.length" type="user" :commentslist="comments"></commentlist>
+    <div v-if="userinfo.openId && books.length">
       <div class="page-title">我的图书</div>
       <card v-for="book in books" :key="book.id" :book="book"></card>
       <div v-if="!books.length" class="nobook-info">没有图书,去添加吧</div>

@@ -48,29 +48,60 @@ export default {
     },
     login () {
       // 设置登录地址
-      let userinfo = wx.getStorageSync('userinfo')
-      if (!userinfo) {
-        qcloud.setLoginUrl(config.loginUrl)
-        qcloud.login({
-          success: (userInfo) => {
-            qcloud.request({
-              url: config.userUrl,
-              login: true,
-              success: (res) => {
-                console.log(res)
-                showSuccess('登录成功')
-                this.userinfo = res.data.data
-                wx.setStorageSync('userinfo', res.data.data)
-              }
-            })
+      qcloud.setLoginUrl(config.loginUrl)
+      const session = qcloud.Session.get()
+      if (session) {
+        qcloud.loginWithCode({
+          success: res => {
+            console.log(res)
+            wx.setStorageSync('userinfo', res)
           },
-          fail: function (err) {
-            console.log('登录失败', err)
+          fail: err => {
+            console.error(err)
           }
         })
       } else {
-
+        qcloud.login({
+          success: res => {
+            console.log(res)
+            showSuccess('登录成功')
+            this.userinfo = res
+            wx.setStorageSync('userinfo', res)
+          },
+          fail: err => {
+            console.error(err)
+            console.log('登录失败', err)
+          }
+        })
       }
+      // let userinfo = wx.getStorageSync('userinfo')
+      // if (!userinfo) {
+      //   qcloud.setLoginUrl(config.loginUrl)
+      //   qcloud.login({
+      //     success: (userInfo) => {
+      //       qcloud.request({
+      //         url: config.userUrl,
+      //         login: true,
+      //         success: (res) => {
+      //           console.log(res)
+      //           showSuccess('登录成功')
+      //           this.userinfo = res.data.data
+      //           wx.setStorageSync('userinfo', res.data.data)
+      //         }
+      //       })
+      //     },
+      //     fail: function (err) {
+      //       console.log('登录失败', err)
+      //     }
+      //   })
+      // } else {
+
+      // }
+    }
+  },
+  watch: {
+    userinfo (newval, oldval) {
+      this.userinfo = newval
     }
   },
   components: {
